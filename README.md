@@ -3,9 +3,9 @@
 
 ## 1.1 데이터 시각화 프로젝트 (9.2~9.9)
 
-### 데이콘 링크 : https://dacon.io/competitions/official/235590/overview/
+#### 데이콘 링크 : https://dacon.io/competitions/official/235590/overview/
 
-### 과제 제출 
+#### 과제 제출 
 1) PDF파일 ( 전반적인 프로젝트 개요 및 설명)  
 2) 발표 녹음 파일(2분 내외)
 - 과제 제출 기한 9월 9일 13시까지
