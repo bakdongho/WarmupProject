@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+    <div class="title">
+        <div class="title_1">
+            <h1>search</h1>
+        </div>
+        <div class="title_2">
+            <a href={% url 'home' %}>홈으로</a>
+        </div>
+    </div>
+    <input type="radio" name="check_search" checked="checked" value="요리이름" /> 요리이름
+    <input type="radio" name="check_search" value="재료" /> 재료
+    <br/>
+    <br/>
+    <input placeholder="이름을 입력하세요" name="name">
+        <br/>
+        <br/>
+    <input placeholder="전화번호를 입력하세요" name="phone_num">
+        <br/>
+        <br/>
+    <button type="submit">검색하기</button>
+</body>
+</html>
