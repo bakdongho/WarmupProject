@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 class FoodUser(models.Model):
@@ -30,3 +31,9 @@ class NutrientFood(models.Model):
     calcium = models.FloatField(null=True)
     Vitaminc = models.FloatField(null=True)
     sugars = models.FloatField(null=True)
+
+class MyRefrigerator(models.Model):
+    refrigerator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='refrigerator')
+    material = models.CharField(max_length=20, null=True)
+    food_time = models.DateTimeField(default=timezone.now)
+    shelf_life = models.IntegerField()
