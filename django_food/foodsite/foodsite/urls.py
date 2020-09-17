@@ -23,8 +23,9 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    path('nut_result/', views.nut_result, name='nut_result'),
+    path('nut_result/<int:category>', views.nut_result, name='nut_result'),
     path('nutrition/', views.nutrition, name='nutrition'),
     path('recipe/', views.recipe, name='recipe'),
     path('personal/', views.personal, name='personal'),
+    path('detail/<int:food_idx>', views.detail, name='detail'),
 ]

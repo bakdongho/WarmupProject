@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import FoodUser, MainFood, NutrientFood
 from django.contrib.auth.models import User
 from django.contrib import auth
+import pandas as pd
 
 # Create your views here.
 ERROR_MSG = {
@@ -115,12 +116,44 @@ def home(request):
 
     return render(request, 'home.html')
 
-def nut_result(request):
-
-    return render(request, 'nut_result.html')
+def nut_result(request,category):
+    dic={
+        1:'당뇨',
+        2:'골다공증',
+        3:'고혈압',
+        4:'갱년기',
+        5:'감기',
+        6:'비염',
+    }
+    nutri_obj=NutrientFood.objects.all().values()
+    df=pd.DataFrame(nutri_obj)
+    if category == 1:
+        dig = dic[1] +'설명~~~'
+    elif category == 2:
+        dig = dic[2]+'설명~~~'
+    elif category == 3:
+        dig = dic[3]+'설명~~~'
+    elif category == 4:
+        dig = dic[4]+'설명~~~'
+    elif category == 5:
+        dig = dic[5]+'설명~~~'
+    elif category == 6:
+        dig = dic[6]+'설명~~~'
+    filter_df = df.loc[1:5,:]
+    print(filter_df)
+    filter_nutri_obj=[]
+    for i in filter_df.idx:
+        filter_nutri_obj.append(NutrientFood.objects.get(idx=i))
+    print(filter_nutri_obj)
+    context = {
+        'nutri': filter_nutri_obj,
+        'contents' : str(dig)
+    }
+    
+    return render(request, 'nut_result.html',context)
 
 def nutrition(request):
-
+    
     return render(request, 'nutrition.html')
 
 def recipe(request):
@@ -130,3 +163,8 @@ def recipe(request):
 def personal(request):
 
     return render(request, 'personal.html')
+
+def detail(request,food_idx):
+    Main_Food=MainFood.objects.get(idx=food_idx)
+
+    return render(request, 'detail.html',{'main_food' : Main_Food})
