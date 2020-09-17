@@ -23,7 +23,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
-    path('nut_result/', views.nut_result, name='nut_result'),
+    path('nut_result/<int:category>', views.nut_result, name='nut_result'),
     path('nutrition/', views.nutrition, name='nutrition'),
     path('recipe/', views.recipe, name='recipe'),
     path('personal/', views.personal, name='personal'),
@@ -32,4 +32,5 @@ urlpatterns = [
     path('add_refrigerator/<int:user_pk>', views.add_refrigerator, name='add_refrigerator'),
     path('edit_refrigerator/<int:user_pk>/<int:refrigerator_pk>', views.edit_refrigerator, name='edit_refrigerator'),
     path('delete_refrigerator/<int:user_pk>/<int:refrigerator_pk>', views.delete_refrigerator, name='delete_refrigerator'),
+    path('detail/<int:food_idx>', views.detail, name='detail'),
 ]

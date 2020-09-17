@@ -7,6 +7,9 @@ verify_ssl = true
 
 [packages]
 django = "*"
+pandas = "*"
+sklearn = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.8"
