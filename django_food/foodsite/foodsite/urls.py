@@ -27,4 +27,9 @@ urlpatterns = [
     path('nutrition/', views.nutrition, name='nutrition'),
     path('recipe/', views.recipe, name='recipe'),
     path('personal/', views.personal, name='personal'),
+    path('mypage/<int:user_pk>', views.mypage, name='mypage'),
+    path('edit_user/<int:user_pk>', views.edit_user, name='edit_user'),
+    path('add_refrigerator/<int:user_pk>', views.add_refrigerator, name='add_refrigerator'),
+    path('edit_refrigerator/<int:user_pk>/<int:refrigerator_pk>', views.edit_refrigerator, name='edit_refrigerator'),
+    path('delete_refrigerator/<int:user_pk>/<int:refrigerator_pk>', views.delete_refrigerator, name='delete_refrigerator'),
 ]
