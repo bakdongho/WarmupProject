@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import FoodUser, MainFood, NutrientFood
+from .models import FoodUser, MainFood, NutrientFood, MyRefrigerator
 from django.contrib.auth.models import User
 from django.contrib import auth
 import pandas as pd
@@ -111,6 +111,89 @@ def logout(request):
         auth.logout(request)
 
     return redirect('home')
+
+def mypage(request, user_pk):
+    Users = User.objects.get(pk=user_pk)
+    Food_User = FoodUser.objects.get(user=Users)
+    MyRefrigerator_User = MyRefrigerator.objects.filter(refrigerator=Users)
+
+    context = {
+
+        'user': Users,
+        'food_user': Food_User,
+        'refrigerator_user': MyRefrigerator_User
+    }
+    
+    return render(request, 'mypage.html', context)
+
+def edit_refrigerator(request, user_pk, refrigerator_pk):
+    Users = User.objects.get(pk=user_pk)
+    Refrigerator_User = MyRefrigerator.objects.get(refrigerator=Users, pk=refrigerator_pk)
+    
+    if request.method == 'POST':
+        update_refrigerator = MyRefrigerator.objects.filter(refrigerator=Users, pk=refrigerator_pk)
+
+        update_refrigerator.update(
+            material = request.POST['material'],
+            shelf_life = request.POST['shelf_life']
+        )
+
+        return redirect('/mypage/' + str(user_pk))
+    
+    context = {
+        'user': Users,
+        'refrigerator_user': Refrigerator_User,
+    }
+
+    return render(request, 'edit_refrigerator.html', context)
+
+def delete_refrigerator(request, user_pk, refrigerator_pk):
+    Users = User.objects.get(pk=user_pk)
+    target_refrigerator = MyRefrigerator.objects.get(refrigerator=Users, pk=refrigerator_pk)
+    target_refrigerator.delete()
+
+    return redirect('/mypage/' + str(user_pk))
+
+def edit_user(request, user_pk):
+    Users = User.objects.get(pk=user_pk)
+    Food_User = FoodUser.objects.get(user=Users)
+
+    if request.method == 'POST':
+        update_fooduser = FoodUser.objects.filter(pk=Food_User.pk)
+
+        update_fooduser.update(
+            name = request.POST['name'],
+            gender = request.POST['gender'],
+            age = request.POST['age'],
+            Repmaterial = request.POST['repmaterial'],
+            pretag = request.POST['pretag'],
+        )
+
+        return redirect('/mypage/' + str(user_pk))
+
+    context = {
+        'user': Users,
+        'fooduser': Food_User
+    }
+    return render(request, 'edit_user.html', context)
+
+def add_refrigerator(request, user_pk):
+    Users = User.objects.get(pk=user_pk)
+
+    if request.method == 'POST':
+        # add_refrigerator_user = MyRefrigerator.objects.filter(pk=refrigerator_User.pk)
+        
+        materials = request.POST['material']
+        shelf_lifes = request.POST['shelf_life']
+
+        MyRefrigerator.objects.create(
+            refrigerator = Users,
+            material = materials,
+            shelf_life = shelf_lifes,
+        )
+        return redirect('/mypage/' + str(user_pk))
+
+    return render(request, 'add_refrigerator.html')
 
 def home(request):
 
