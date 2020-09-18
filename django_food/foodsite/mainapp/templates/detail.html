@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'detail.css' %}">
+</head>
+<body>
+    <div class="title">
+        <div class="title_1">
+            <h1>detail</h1>
+        </div>
+        <div class="title_2">
+            <a href={% url 'home' %}>홈으로</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class = 'image'>
+            이미지
+        </div>
+        <div class="category">
+            <div class="one">
+                {{main_food.name}}
+            </div>
+            <div class="two">
+                {{main_food.material}}
+            </div>
+        </div>
+        
+        <div class="menu_2">
+            <div class="three">
+                {{main_food.recipe}}
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'nutri.css' %}">
+</head>
+<body>
+    <div class="title">
+        <div class="title_1">
+            <h1>nutri</h1>
+        </div>
+        <div class="title_2">
+            <a href={% url 'home' %}>홈으로</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="category">
+            <a href={% url 'nut_result' 1 %}>
+                <div class="one">
+                    당뇨
+                </div>
+            </a>
+            <a href={% url 'nut_result' 2 %}>
+                <div class="two">
+                    골다공증
+                </div>
+            </a>
+            <a href={% url 'nut_result' 3 %}>
+                <div class="three">
+                    고혈압
+                </div>
+            </a>
+        </div>
+        
+        <div class="menu_2">
+            <a href={% url 'nut_result' 4 %}>
+                <div class="one">
+                    갱년기
+                </div>
+            </a>
+            <a href={% url 'nut_result' 5 %}>
+                <div class="two">
+                    감기
+                </div>
+            </a>
+            <a href={% url 'nut_result' 6 %}>
+                <div class="three">
+                    비염
+                </div>
+            </a>
+        </div>
+        
+    </div>
+</body>
+</html>
