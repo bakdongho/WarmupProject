@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+    <div class="title">
+        <div class="title_1">
+            <h1>home</h1>
+        </div>
+    </div>
+    
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method='POST'>
+            {% csrf_token %}
+            {{user.get_username}} 님, 안녕하세요
+            <div>
+                <a href="{% url 'mypage' user.pk %}">마이페이지</a>
+            </div>
+            <button type='submit'>로그아웃</button>
+        </form>
+    {% else %}
+        <div class="title_2">
+            <a href="{% url 'signup' %}">회원가입</a>
+            <br>
+            <br>
+            <a href="{% url 'login' %}">로그인</a>
+            <br>
+            <br>
+        </div>
+    {% endif %}
+
+        <div class="main">
+
+        <div class="menu_1">
+
+            <a href={% url 'recipe' %}>
+                <div class="search">
+                    요리법검색
+                </div>
+            </a>
+
+            <a href={% url 'personal' %}>
+                <div class="personal">
+                    나만의추천
+                </div>
+            </a>
+
+            <a href={% url 'nutrition' %}>
+                <div class="nutri">
+                    건강맞춤
+                </div>
+            </a>
+
+        </div>
+        
+        <div class="menu_2">
+            인기 레서피 나열 또는 기능 구현
+        </div>
+
+    </div>
+
+</body>
+</html>

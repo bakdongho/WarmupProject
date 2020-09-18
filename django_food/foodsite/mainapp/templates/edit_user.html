@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>내정보 수정하기</h1>
+    <form action="{%url 'edit_user' user.pk %}" method='POST'>
+        {% csrf_token %}
+        <div>이름: <input value="{{fooduser.name}}" placeholder='이름을 입력하세요' name='name'></div>
+        <div>성별: <input value="{{fooduser.gender}}" placeholder='성별을 입력하세요' name='gender'></div>
+        <div>나이대: <input value="{{fooduser.age}}" placeholder='나이대를 입력하세요' name='age'></div>
+        <div>기피하는 재료: <input value="{{fooduser.Repmaterial}}" placeholder='기피하는 재료를 입력하세요' name='repmaterial'></div>
+        <div>선호하는 tag: <input value="{{fooduser.pretag}}" placeholder='선호하는 tag를 입력하세요' name='pretag'></div>
+        
+        <button type='submit'>수정하기</button>
+    </form>
+
+
+</body>
+</html>

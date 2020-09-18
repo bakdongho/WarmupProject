@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>냉장고 속 재료 수정하기</h1>
+    <h3> {{user}}의 냉장고입니다! </h3>
+    <form action="{%url 'edit_refrigerator' user.pk refrigerator_user.pk %}" method="POST">
+        {% csrf_token %}
+        <div>재료: <input value="{{refrigerator_user.material}}" placeholder="재료 입력" name="material"></div>
+        <div>유통기한: <input value="{{refrigerator_user.shelf_life}}" placeholder="유통기한 입력" name="shelf_life"></div>
+
+        <button type='submit'>수정하기</button>
+    </form>
+    <form action="{%url 'delete_refrigerator' user.pk refrigerator_user.pk %}" method='POST'>
+        {% csrf_token %}
+        <button type='submit' onclick="return confirm('정말 삭제하시겠습니까?');">삭제하기</button>
+    </form>
+</body>
+</html>
