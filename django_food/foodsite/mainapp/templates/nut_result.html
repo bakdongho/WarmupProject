@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'nut_result.css' %}">
+</head>
+<body>
+    <div class="title">
+        <div class="title_1">
+            <h1>nut_result</h1>
+        </div>
+        <div class="title_2">
+            <a href={% url 'home' %}>홈으로</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="category">
+            <a href={% url 'nut_result' 1 %}>
+                <div class="one">
+                    당뇨
+                </div>
+            </a>
+            <a href={% url 'nut_result' 2 %}>
+                <div class="two">
+                    골다공증
+                </div>
+            </a>
+            <a href={% url 'nut_result' 3 %}>
+                <div class="three">
+                    고혈압
+                </div>
+            </a>
+            <a href={% url 'nut_result' 4 %}>
+                <div class="one">
+                    갱년기
+                </div>
+            </a>
+            <a href={% url 'nut_result' 5 %}>
+                <div class="two">
+                    감기
+                </div>
+            </a>
+            <a href={% url 'nut_result' 6 %}>
+                <div class="three">
+                    비염
+                </div>
+            </a>
+            <!-- <form action="{% url 'nut_result' 2 %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">수정하기</button>
+                <div class="one">
+                    <button type="submit">당뇨</button>
+                </div>
+                <div class="two">
+                    <button type="submit">골다공증</button>
+                </div>
+                <div class="three">
+                    
+                    <button type="submit">고혈압</button>
+                </div>
+                <div class="one">
+                    
+                    <button type="submit">갱년기</button>
+                </div>
+                <div class="two">
+                    
+                    <button type="submit">감기</button>
+                </div>
+                <div class="three">
+                    
+                    <button type="submit">비염</button>
+                </div>
+            </form> -->
+        </div>
+        <div class="contents">
+            {{contents}}}
+        </div>
+
+
+        <div class="menu_2">
+            {% for line in nutri %}
+            <li>
+                <div class='menu_list'>
+                    <div class='menu_name'>
+                         <a href={% url 'detail' line.idx %}> 
+                            {{line.name}}
+                         </a> 
+                    </div>
+                    <div class='menu_calorie'>{{line.calorie}}</div>
+                    
+                </div>
+            </li>
+            {% endfor %}
+        </div> 
+</body>
+</html>
