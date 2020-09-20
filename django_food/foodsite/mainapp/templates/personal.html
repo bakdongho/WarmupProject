@@ -38,7 +38,9 @@
         {% for food in data.itertuples %}
             <div>
                 <li>
+                    <a href={% url 'detail' food.idx %}>
                     {{food.name}}
+                     </a>
                 </li>
             </div>
         {% endfor %}
