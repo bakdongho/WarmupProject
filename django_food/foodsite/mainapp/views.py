@@ -3,6 +3,9 @@ from .models import FoodUser, MainFood, NutrientFood, MyRefrigerator
 from django.contrib.auth.models import User
 from django.contrib import auth
 import pandas as pd
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 # Create your views here.
 ERROR_MSG = {
@@ -243,11 +246,108 @@ def recipe(request):
 
     return render(request, 'recipe.html')
 
-def personal(request):
+def personal(request, user_pk):
+    Users = User.objects.get(pk=user_pk)
+    MyRefrigerator_User = MyRefrigerator.objects.filter(refrigerator=Users).values()
+    Food_User = FoodUser.objects.get(user=Users)
 
-    return render(request, 'personal.html')
+    # 전처리
+    datas = pd.DataFrame(MyRefrigerator_User)
+    datas = datas.sort_values(by='shelf_life', ascending=True)
+    datas = datas.drop(['refrigerator_id'], axis='columns')
+    # print(datas) 
+    
+    # user 기피재료, 선호태그
+    hate_food = Food_User.Repmaterial.split(' ')
+    like_tag = Food_User.pretag.split(' ')
+    # print(hate_food[1])
+
+    # 기피재료 빼기
+    sw_materials = []    # 미역, 김
+    for i in datas['material']:
+        for j in hate_food:
+            if i == j:
+                sw_materials.append(i)
+    # print(sw_material)
+
+    for i in sw_materials:
+        drop_index = datas[datas['material'] == i].index
+        datas = datas.drop(drop_index)
+    # print(datas)
+    
+    # 유통기한 자르기
+    count = 0
+    use_materials = datas[0:3]
+    # print(use_materials)
+    add_material = 2    # 더할 재료개수 (0일경우 기본 3개)
+    deadline = 7    # 유통기한 마감날짜 
+
+    for i in range(len(datas[3:])):
+        if count != add_material:  
+            if datas[3+i:4+i].shelf_life.item() <= deadline:
+                use_materials = use_materials.append(datas[3+i:4+i])
+                count += 1
+    # print(use_materials)
+
+    user_materials = ''
+    for i in use_materials['material']:
+        user_materials = user_materials + i + ' '
+    print('사용재료: ', user_materials)
+
+
+    # content 유사도 구하기
+    data = MainFood.objects.all().values()
+    df = pd.DataFrame(data)
+
+    # 냉장고 재료 데이터 넣기
+    user_data = {'idx':5220, 'name':'user', 'recipe':' ', 'material':user_materials, 'tag':' '}
+    df = df.append(user_data, ignore_index=True)
+
+    # TFIDF
+    # tfidf_vec = TfidfVectorizer(ngram_range=(1, 2))
+    tfidf_vec = TfidfVectorizer()
+    tfidf_matrix = tfidf_vec.fit_transform(df['material'])
+    # print(tfidf_vec.vocabulary_.items())
+    # print(tfidf_matrix.shape)
+
+
+    # 유사도
+    genres_similarity = cosine_similarity(tfidf_matrix, tfidf_matrix)
+    # print(genres_similarity)
+    similar_index = np.argsort(-genres_similarity)
+    # print(similar_index)
+
+    # 냉장고 재료와 비슷한 것 뽑기
+    user_index = df[df['name']=='user'].index.values
+
+    similar_food = similar_index[user_index, 1:6]
+    similar_food_index = similar_food.reshape(-1)
+    data = df.iloc[similar_food_index]
+    # print(data)
+
+    print('========================================= 유사도 측정 결과 >> 요리 List =====================================================')
+    print(df.iloc[similar_food_index]['name'])
+
+    food_idx = []
+    for i in df.iloc[similar_food_index]['idx']:
+        food_idx.append(i)
+    print(food_idx)
+
+
+    context = {
+        'user': Users,
+        'use_materials': use_materials,
+        'data': data,
+        'food_idx1': food_idx[0],
+        'food_idx2': food_idx[1],
+        'food_idx3': food_idx[2],
+        'food_idx4': food_idx[3],
+        'food_idx5': food_idx[4],
+    }
+    return render(request, 'personal.html', context)
 
 def detail(request,food_idx):
-    Main_Food=MainFood.objects.get(idx=food_idx)
+    Main_Food = MainFood.objects.get(idx=food_idx)
+
 
     return render(request, 'detail.html',{'main_food' : Main_Food})
