@@ -1,23 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>edit_user</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href='{% static "vendor/bootstrap/css/bootstrap.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "fonts/iconic/css/material-design-iconic-font.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/animate/animate.css" %}'>	
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/css-hamburgers/hamburgers.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/animsition/css/animsition.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/select2/select2.min.css" %}'>	
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/daterangepicker/daterangepicker.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "css/util.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "css/main.css" %}'>
 </head>
 <body>
-    <h1>내정보 수정하기</h1>
-    <form action="{%url 'edit_user' user.pk %}" method='POST'>
-        {% csrf_token %}
-        <div>이름: <input value="{{fooduser.name}}" placeholder='이름을 입력하세요' name='name'></div>
-        <div>성별: <input value="{{fooduser.gender}}" placeholder='성별을 입력하세요' name='gender'></div>
-        <div>나이대: <input value="{{fooduser.age}}" placeholder='나이대를 입력하세요' name='age'></div>
-        <div>기피하는 재료: <input value="{{fooduser.Repmaterial}}" placeholder='기피하는 재료를 입력하세요' name='repmaterial'></div>
-        <div>선호하는 tag: <input value="{{fooduser.pretag}}" placeholder='선호하는 tag를 입력하세요' name='pretag'></div>
-        
-        <button type='submit'>수정하기</button>
-    </form>
+    <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<form action="{%url 'edit_user' user.pk  %}" method='POST'>
+				    {% csrf_token %}
+					<span class="login100-form-title p-b-70">
+						Edit
+					</span>
 
+					<div class="wrap-input100 validate-input m-b-50">
+						<span>이름을 수정하세요</span>
+                        <input class="input100" name="name" value="{{fooduser.name}}">
+					</div>
+					<div class="wrap-input100 validate-input m-b-50">
+                    	<span>성별을 수정하세요</span>
+						<input class="input100" name="gender" value="{{fooduser.gender}}">
+					</div>
+					<div class="wrap-input100 validate-input m-b-50">
+						<span>나이대를 수정하세요</span>
+                        <input class="input100" name="age" value="{{fooduser.age}}">
+					</div>
+					<div class="wrap-input100 validate-input m-b-50">
+                        <span>기피하는 재료를 수정하세요</span>
+						<input class="input100" name="repmaterial" value="{{fooduser.Repmaterial}}">
+					</div>
+					<div class="wrap-input100 validate-input m-b-50">
+                        <span>선호하는 tag를 수정하세요</span>
+						<input class="input100" name="pretag" value="{{fooduser.pretag}}">
+					</div>
 
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Submit
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

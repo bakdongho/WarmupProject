@@ -1,18 +1,50 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>add_refrigerator</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href='{% static "vendor/bootstrap/css/bootstrap.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "fonts/iconic/css/material-design-iconic-font.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/animate/animate.css" %}'>	
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/css-hamburgers/hamburgers.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/animsition/css/animsition.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/select2/select2.min.css" %}'>	
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/daterangepicker/daterangepicker.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "css/util.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "css/main.css" %}'>
 </head>
 <body>
-    <h1>냉장고에 재료넣기</h1>
-    <form action="{%url 'add_refrigerator' user.pk %}" method='POST'>
-        {% csrf_token %}
-        <input type="text" placeholder="재료" name='material'>
-        <input type="text" placeholder="유통기한" name='shelf_life'>
-        
-        <button type='submit'>재료넣기</button>
-    </form>
+    <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<form action="{%url 'add_refrigerator' user.pk  %}" method='POST'>
+				    {% csrf_token %}
+					<div class="login100-form-title p-b-70">
+						냉장고에 재료 넣기
+					</div>
+                    <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
+						<input class="input100" type="text" name="material">
+						<span class="focus-input100" data-placeholder="재료를 입력하세요"></span>
+					</div>
+
+                    <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
+						<input class="input100" type="text" name="shelf_life">
+						<span class="focus-input100" data-placeholder="유통기한을 입력하세요"></span>
+					</div>
+                    <br>
+                    <br>
+                    <br>
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							재료 넣기
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
