@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import FoodUser, MainFood, NutrientFood, MyRefrigerator
+from .models import FoodUser, MainFood, NutrientFood, MyRefrigerator, GeneralFood
 from django.contrib.auth.models import User
 from django.contrib import auth
 import pandas as pd
@@ -204,36 +204,93 @@ def home(request):
 
 def nut_result(request,category):
     dic={
-        1:'당뇨',
-        2:'골다공증',
-        3:'고혈압',
-        4:'갱년기',
-        5:'감기',
-        6:'비염',
+        1:['감기','설명~~'],
+        2:['비만','설명~~'],
+        3:['빈혈','설명~~'],
+        4:['고혈압','설명~~'],
+        5:['심부전','설명~~'],
+        6:['고지혈증','설명~~'],
+        7:['당뇨','설명~~'],
+        8:['심근경색','설명~~'],
+        9:['뇌졸중','설명~~'],
+        10:['골다공증','설명~~']
     }
-    nutri_obj=NutrientFood.objects.all().values()
-    df=pd.DataFrame(nutri_obj)
+    GeneralFood_obj=GeneralFood.objects.all().values()
+    df=pd.DataFrame(GeneralFood_obj)
+
     if category == 1:
-        dig = dic[1] +'설명~~~'
+    # 감기
+        df = df[df['material'].str.contains('우유|초콜렛|초콜릿|사과|라임')==False]
+        df = df[df['material'].str.contains('콩나물|더덕|모과|무|배|도라지|칡|생강|유자|호박|대추|오렌지|포도|레몬|녹차|꿀|딸기|귤|피망|고추|브로콜리|굴')]
+        df = df[df['name'].str.contains('차|스프|죽|미음')]
+        filter_df = df.sort_values(by=['Vitaminc', 'protein'], ascending=[False, False])
     elif category == 2:
-        dig = dic[2]+'설명~~~'
+    # 비만
+        df = df[df['tag'].str.contains('다이어트')]
+        df = df[df['material'].str.contains('설탕|버터|마가린|쇠고기|소고기|돼지고기|스팸|흰밥|빵|떡')==False]
+        df = df[df['material'].str.contains('다시마|미역|닭가슴살|아보카도|생강|대추|콩|자몽')]
+        df = df[df['name'].str.contains('과자|쿠키|빵|떡')==False]
+        filter_df = df.sort_values(by=['carbohydrate','salt','sugars'], ascending=[True, True, True])
     elif category == 3:
-        dig = dic[3]+'설명~~~'
+    # 빈혈
+        df = df[df['tag'].str.contains('빈혈')]
+        df = df[df['material'].str.contains('밀가루|녹차|커피|초콜릿|초콜렛')==False]
+        df = df[df['material'].str.contains('시금치|땅콩|소고기|쇠고기|노른자|미역|브로콜리|레드비트|굴|토마토|체리|연어')]
+        filter_df = df.sort_values(by=['Vitaminc', 'protein'], ascending=[False, False])
     elif category == 4:
-        dig = dic[4]+'설명~~~'
+    # 고혈압
+        df = df[df['material'].str.contains('빵|밀가루|버터|마가린|치즈|햄|조개|마요네즈|새우|김치')==False]
+        df = df[df['material'].str.contains('양파|마늘|시금치|바나나|계피|올리브오일|비트|귀리')]
+        filter_df = df.sort_values(by=['calcium','Vitaminc','Dietary_Fiber'], ascending=[False, False, False])
     elif category == 5:
-        dig = dic[5]+'설명~~~'
+    # 심부전
+        df = df[df['material'].str.contains('고추|겨자|카레|우엉|파|부추|고구마|밀가루')==False]
+        df = df[df['material'].str.contains('두부|바나나|콩|호두|요거트')]
+        df = df[df['name'].str.contains('튀김|차|도넛')==False]
+        filter_df = df.sort_values(by=['cholesterol', 'Lipid', 'salt','protein', 'Dietary_Fiber'], ascending=[True, True, True, False, False])
     elif category == 6:
-        dig = dic[6]+'설명~~~'
-    filter_df = df.loc[1:5,:]
-    print(filter_df)
-    filter_nutri_obj=[]
+    # 고지혈증
+        df = df[df['material'].str.contains('기름|마가린|빵|커피|베이컨|소시지|소세지|햄|치즈')==False]
+        df = df[df['material'].str.contains('양파|마늘|파|토마토|호두|아몬드|카레')]
+        df = df[df['name'].str.contains('라면|과자|아이스크림|빵|케이크')==False]
+        filter_df = df.sort_values(by=['Vitaminc','Dietary_Fiber', 'carbohydrate','sugars','cholesterol'], ascending=[False,False, True, True, True])
+    elif category == 7:
+    # 당뇨
+        df = df[df['material'].str.contains('설탕|밀가루|조청|치즈|흰|버터')==False]
+        df = df[df['material'].str.contains('현미|시금치|콩|두부|순두부|토마토|양파|대추|표고버섯|당근|녹두|고구마|옥수수|청국장|호두|둥글레|두릅|마늘|팥')]
+        df = df[df['name'].str.contains('라면|과자|아이스크림|빵|케이크|젓갈|장아찌|주스|쥬스|튀김|조림')==False]
+        filter_df = df.sort_values(by=['Dietary_Fiber', 'carbohydrate','sugars'], ascending=[False, True, True])
+    elif category == 8:
+    # 심근경색
+        df = df[df['material'].str.contains('돼지갈비|소갈비|등심|안심|삼겹살|곱창|내장|햄|소시지|베이컨|버터|마요네즈|우유|생크림|치즈|밀가루|새우|장어|미꾸라지|오징어')==False]
+        df = df[df['material'].str.contains('고등어|연어|참치|동태|갈치|두부|호두|아몬드|땅콩|콩')]
+        df = df[df['name'].str.contains('튀김|도넛')==False]
+        filter_df = df.sort_values(by=['Dietary_Fiber','salt', 'Lipid','cholesterol'], ascending=[False, True, True, True])
+    elif category == 9:
+    # 뇌졸중
+        df = df[df['material'].str.contains('오징어|새우|게|소시지|햄|베이컨|초콜릿|밀가루|치즈')==False]
+        df = df[df['material'].str.contains('고등어|토마토|당근|사과|배|베리|아보카도|정어리|멜론|수박|녹차|귀리|생강|꽁치|부추|미역|다시마|연어|매생이')]
+        filter_df = df.sort_values(by=['Dietary_Fiber','Vitaminc','salt'], ascending=[False,False, True])
+    elif category == 10:
+    # 골다공증
+        df = df[df['material'].str.contains('설탕|소금|커피')==False]
+        df = df[df['material'].str.contains('우유|요거트|요구르트|고등어|연어|표고버섯|멸치|사과|귤|콩|콩나물|순두부|두부|아몬드|냉이|고사리|김|다시마|가오리|명태')]
+        filter_df = df.sort_values(by=['calcium', 'Vitaminc','salt'], ascending=[False, False, True])
+
+    
+    
+    filter_food_obj=[]
+    count=0
     for i in filter_df.idx:
-        filter_nutri_obj.append(NutrientFood.objects.get(idx=i))
-    print(filter_nutri_obj)
+        if count<5 : 
+            filter_food_obj.append(GeneralFood.objects.get(idx=i))
+            count+=1
+        else:
+            break
     context = {
-        'nutri': filter_nutri_obj,
-        'contents' : str(dig)
+        'nutri': filter_food_obj[:4],
+        'contents' : dic[category][1],
+        'title' : dic[category][0]
     }
     
     return render(request, 'nut_result.html',context)

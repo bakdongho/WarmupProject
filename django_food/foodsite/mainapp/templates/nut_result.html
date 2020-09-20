@@ -11,7 +11,7 @@
 <body>
     <div class="title">
         <div class="title_1">
-            <h1>nut_result</h1>
+            <h1>{{title}}</h1>
         </div>
         <div class="title_2">
             <a href={% url 'home' %}>홈으로</a>
@@ -22,60 +22,55 @@
         <div class="category">
             <a href={% url 'nut_result' 1 %}>
                 <div class="one">
-                    당뇨
+                    감기
                 </div>
             </a>
             <a href={% url 'nut_result' 2 %}>
                 <div class="two">
-                    골다공증
+                    비만
                 </div>
             </a>
             <a href={% url 'nut_result' 3 %}>
                 <div class="three">
-                    고혈압
+                    빈혈
                 </div>
             </a>
             <a href={% url 'nut_result' 4 %}>
                 <div class="one">
-                    갱년기
+                    고혈압
                 </div>
             </a>
             <a href={% url 'nut_result' 5 %}>
                 <div class="two">
-                    감기
+                    심부전
                 </div>
             </a>
             <a href={% url 'nut_result' 6 %}>
                 <div class="three">
-                    비염
+                    고지혈증
                 </div>
             </a>
-            <!-- <form action="{% url 'nut_result' 2 %}" method="POST">
-                {% csrf_token %}
-                <button type="submit">수정하기</button>
+            <a href={% url 'nut_result' 7 %}>
                 <div class="one">
-                    <button type="submit">당뇨</button>
+                    당뇨
                 </div>
+            </a>
+            <a href={% url 'nut_result' 8 %}>
                 <div class="two">
-                    <button type="submit">골다공증</button>
+                    심근경색
                 </div>
+            </a>
+            <a href={% url 'nut_result' 9 %}>
                 <div class="three">
-                    
-                    <button type="submit">고혈압</button>
+                    뇌졸중
                 </div>
+            </a>
+            <a href={% url 'nut_result' 10 %}>
                 <div class="one">
-                    
-                    <button type="submit">갱년기</button>
+                    골다공증
                 </div>
-                <div class="two">
-                    
-                    <button type="submit">감기</button>
-                </div>
-                <div class="three">
-                    
-                    <button type="submit">비염</button>
-                </div>
-            </form> -->
+            </a>
+           
         </div>
         <div class="contents">
             {{contents}}}
