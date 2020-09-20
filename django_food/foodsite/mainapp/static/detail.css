@@ -20,7 +20,9 @@
     justify-content: center;
     align-items: center;
     width: 700px;
-    height: 200px;
+    height: 400px;
+    background-image: url('./img/back3.png');
+    background-size:contain;
 }
 
 .category{

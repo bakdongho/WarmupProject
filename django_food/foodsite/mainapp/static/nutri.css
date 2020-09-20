@@ -1,3 +1,4 @@
+
 .title{
     display: flex;
     width: 800px;
@@ -11,7 +12,7 @@
     width: 800px;
     height: 700px;
     flex-direction: column;
-    background-color: lightpink;
+    /* background-color: lightpink; */
     /* justify-content: space-around; */
     align-items: center;
 }
