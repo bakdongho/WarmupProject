@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyPage</title>
+    <link rel="stylesheet" href="{% static 'mypage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/animate.min.cs' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/creative.css' %}" type="text/css">
 </head>
 <body>
-    <h1>mypage!</h1>
-
-    <!-- FoodUser -->
-    <div>
-        <h3>유저 정보</h3>
-        <div>
+    <div class="for_center">
+        <div class="title">
+            <h1>My Page</h1>
+        </div>
+        <div class="box">
+            <div class="inside_title">
+                {{user}}'s information
+            </div>
             <div>
                 id : {{user.get_username}}
             </div>
@@ -25,43 +35,32 @@
                 age : {{food_user.age}}
             </div>
             <div>
-                Repmaterial : {{food_user.Repmaterial}}
+                like : {{food_user.pretag}}
             </div>
             <div>
-                pretag : {{food_user.pretag}}
+                dislike : {{food_user.Repmaterial}}
             </div>
+            <div class="title">
+            	<a href="{% url 'edit_user' user.pk %}" class="btn btn-primary btn-xl page-scroll">edit</a>
+        	</div>
         </div>
-        <div>
-            <a href="{% url 'edit_user' user.pk %}">내정보 수정하기</a>
+        <div class="box">
+            <div class="inside_title">
+                Checklist
+            </div>
+                {% for refrigerator in refrigerator_user.all %}
+                <div class="inside_box">
+                    <a href="{%url 'edit_refrigerator' user.pk refrigerator.pk %}">{{refrigerator.material}}</a>
+                </div>
+                <div class="inside_word">
+                    <div>생성날짜 : {{refrigerator.food_time}}</div>
+                    <div>유통기한 : {{refrigerator.shelf_life}} 일 남았습니다.</div>
+                </div>
+                {% endfor %}
+            <div class="title2">
+            	<a href="{% url 'add_refrigerator' user.pk %}" class="btn btn-primary btn-xl page-scroll">add</a>
+            <div>
         </div>
-        
     </div>
-    <br>
-
-    <!-- MyRefrigerator -->
-    <h3>냉장고 가계부</h3>
-    <div>
-        <a href="{% url 'add_refrigerator' user.pk %}">재료 추가하기</a>
-    </div>
-    
-        {% for refrigerator in refrigerator_user.all %}
-            <ol>
-                <li>
-                    <ul >
-                        <a href="{%url 'edit_refrigerator' user.pk refrigerator.pk %}">
-                            재료 : {{refrigerator.material}}
-                        </a>
-                    </ul>
-                    <ul>
-                        <label>생성날짜: {{refrigerator.food_time}} </label>
-                    </ul>
-                    <ul>
-                        <label>유통기한 : {{refrigerator.shelf_life}} 일 남았습니다.</label>
-                    </ul>
-                </li>
-            </ol>
-        {% endfor %}
-
-
 </body>
 </html>
