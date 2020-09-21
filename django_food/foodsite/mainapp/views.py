@@ -298,7 +298,90 @@ def nut_result(request,category):
 
 def recipe(request):
 
+    if request.method == 'POST':
+        search_input = request.POST['search_input']
+        return redirect('search_result')
+    
     return render(request, 'recipe.html')
+
+def search_result(request, search_input):
+    GeneralFood_obj=GeneralFood.objects.all().values()
+    df=pd.DataFrame(GeneralFood_obj)
+    df = df[df['name'|'material'].str.contains(search_input)]
+    search_food_obj = []
+    for i in df.idx:
+        search_food_obj.append(GeneralFood.object.get(idx=i))
+
+    context={
+        'search_input' : search_input,
+        'search_result' : search_food_obj[:]
+
+    }
+
+    return render(request, 'search_result.html', context)
+
+
+def category_result(request,category):
+    dic={
+        1:['국물 요리','키워드: 국/탕/술안주'],
+        2:['면 요리','키워드: 면/비빔면/국물면'],
+        3:['찜 요리','키워드: 찜/돼지고기/술안주'],
+        4:['색다른 요리','키워드: 이국적인 맛/손님/접대'],
+        5:['디저트','키워드: 빵/케이크/양식'],
+        6:['김밥/롤/주먹밥','키워드: 김밥/롤/주먹밥'],
+        7:['콩/두부 요리','키워드: 콩/두부/다이어트'],
+        8:['햄/소시지 요리','키워드: 햄/소시지'],
+        9:['나들이 요리','키워드: 나들이/샌드위치/양식'],
+        10:['건강한 요리','키워드: 건강/예방/아이']
+    }
+    GeneralFood_obj=GeneralFood.objects.all().values()
+    df=pd.DataFrame(GeneralFood_obj)
+
+    if category == 1:
+        df = df[df['category']=='국물 요리']
+        
+    elif category == 2:
+
+        df = df[df['category']=='면 요리']
+
+    elif category == 3:
+        df = df[df['category']=='찜 요리'] 
+
+    elif category == 4:
+        df = df[df['category']=='색다른 요리']
+
+    elif category == 5:
+        df = df[df['category']=='디저트 요리']
+
+    elif category == 6:
+        df = df[df['category']=='김밥/롤/주먹밥']
+
+    elif category == 7:
+        df = df[df['category']=='콩/두부 요리']
+
+    elif category == 8:
+        df = df[df['category']=='햄/소시지 요리']
+
+    elif category == 9:
+        df = df[df['category']=='나들이 요리']
+
+    elif category == 10:
+        df = df[df['category']=='건강을 위한 요리']
+
+    
+    
+    category_food_obj=[]
+    for i in df.idx:
+        category_food_obj.append(GeneralFood.objects.get(idx=i))
+    context = {
+        'in_category_1': category_food_obj[:20],
+        'in_category_2': category_food_obj[20:40],
+        'in_category_3': category_food_obj[40:60],
+        'contents' : dic[category][1],
+        'title' : dic[category][0]
+    }
+    
+    return render(request, 'category_result.html', context)
 
 def personal(request, user_pk):
     Users = User.objects.get(pk=user_pk)

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <head>
+    <head>
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +11,13 @@
 <body>
     <div class="title">
         <div class="title_1">
-            <h1>recipe</h1>
+            <h1>{{title}}</h1>
         </div>
         <div class="title_2">
             <a href={% url 'home' %}>홈으로</a>
         </div>
     </div>
+
     <div class="box_1">
         <div class="group">
             <a href={% url 'category_result' 1 %}>
@@ -73,18 +74,55 @@
             </a>
         </div>
     </div>
-    <br/>
-    <form action="{%url 'recipe' %}" method='POST'>
-        {% csrf_token %}
-        <!-- <input type="radio" name="check_search" checked="checked" value="요리이름" /> 요리 이름으로 검색하기
-        <input type="radio" name="check_search" value="재료" /> 재료로 검색하기
+
+        <div class="contents">
+            {{contents}}
+        </div>
         <br/>
-        <br/>
-        -->
-        <h3>요리 이름 또는 재료로 검색할 수 있습니다.</h3>
-        <input placeholder="입력하세요" name="search_input">
-        <button type="submit">검색하기</button>
-    </form>
-   
+
+
+
+        <div class="menu_2">
+            {% for line in in_category_1 %}
+            <li>
+                <div class='menu_list'>
+                    <div class='menu_name'>
+                         <a href={% url 'detail' line.idx %}> 
+                            {{line.name}}
+                         </a> 
+                    </div>
+                    
+                </div>
+            </li>
+            {% endfor %}
+        </div> 
+        <div class="menu_2">
+            {% for line in in_category_2 %}
+            <li>
+                <div class='menu_list'>
+                    <div class='menu_name'>
+                         <a href={% url 'detail' line.idx %}> 
+                            {{line.name}}
+                         </a> 
+                    </div>
+                    
+                </div>
+            </li>
+            {% endfor %}
+        </div> 
+        <div class="menu_2">
+            {% for line in in_category_3 %}
+            <li>
+                <div class='menu_list'>
+                    <div class='menu_name'>
+                         <a href={% url 'detail' line.idx %}> 
+                            {{line.name}}
+                         </a> 
+                    </div>
+                    
+                </div>
+            </li>
+            {% endfor %}
+        </div> 
 </body>
 </html>
