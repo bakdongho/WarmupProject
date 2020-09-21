@@ -24,7 +24,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('nut_result/<int:category>', views.nut_result, name='nut_result'),
-    path('nutrition/', views.nutrition, name='nutrition'),
     path('recipe/', views.recipe, name='recipe'),
     path('personal/<int:user_pk>', views.personal, name='personal'),
     path('mypage/<int:user_pk>', views.mypage, name='mypage'),
