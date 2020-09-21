@@ -74,7 +74,7 @@
         </div>
     </div>
     <br/>
-    <form action="{%url 'recipe' %}" method='POST'>
+    <form action="{%url 'search_result' %}" method='POST'>
         {% csrf_token %}
         <!-- <input type="radio" name="check_search" checked="checked" value="요리이름" /> 요리 이름으로 검색하기
         <input type="radio" name="check_search" value="재료" /> 재료로 검색하기
@@ -82,8 +82,15 @@
         <br/>
         -->
         <h3>요리 이름 또는 재료로 검색할 수 있습니다.</h3>
-        <input placeholder="입력하세요" name="search_input">
-        <button type="submit">검색하기</button>
+        <div>
+            <input placeholder="입력하세요" name="input_food">
+            <button type="submit">검색하기</button>
+        </div>
+
+        {% comment %} <div>
+            <input placeholder="재료를 입력하세요" name="input_material">
+            <button type="submit">검색하기</button>
+        </div> {% endcomment %}
     </form>
    
 </body>

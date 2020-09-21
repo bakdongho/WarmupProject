@@ -11,16 +11,15 @@
 <body>
     <div class="title">
         <div class="title_1">
-            <h1>{{search_input}}</h1>
+         <h1>검색: {{search_foodname}}</h1> 
         </div>
         <div class="title_2">
             <a href={% url 'home' %}>홈으로</a>
         </div>
     </div>
-  
-
+    
         <div class="menu_2">
-            {% for line in search_result %}
+            {% for line in search_result_1 %}
             <li>
                 <div class='menu_list'>
                     <div class='menu_name'>
@@ -33,6 +32,35 @@
             </li>
             {% endfor %}
         </div> 
-         
+        
+        <div class="menu_2">
+            {% for line in search_result_2 %}
+            <li>
+                <div class='menu_list'>
+                    <div class='menu_name'>
+                         <a href={% url 'detail' line.idx %}> 
+                            {{line.name}}
+                         </a> 
+                    </div>
+                    
+                </div>
+            </li>
+            {% endfor %}
+        </div>
+
+        <div class="menu_2">
+            {% for line in search_result_3 %}
+            <li>
+                <div class='menu_list'>
+                    <div class='menu_name'>
+                         <a href={% url 'detail' line.idx %}> 
+                            {{line.name}}
+                         </a> 
+                    </div>
+                    
+                </div>
+            </li>
+            {% endfor %}
+        </div>
 </body>
 </html>
