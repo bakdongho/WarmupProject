@@ -7,91 +7,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>recipe</title>
     <link rel="stylesheet" href="{% static 'recipe.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/animate.min.cs' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/creative.css' %}" type="text/css">
+    <link rel="stylesheet" type="text/css" href='{% static "css/util.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "css/main.css" %}'>
 </head>
 <body>
-    <div class="title">
-        <div class="title_1">
-            <h1>recipe</h1>
+    <div class="for_center">
+        <div class="title">
+            <div><h1>Search the recipe!</h1></div>
         </div>
-        <div class="title_2">
-            <a href={% url 'home' %}>홈으로</a>
+        <div class="box">
+            <div class="disease">
+                <a href={% url 'category_result' 1 %}>국물 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 2 %}>면 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 3 %}>찜 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 4 %}>색다른 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 5 %}>디저트 요리</a>
+            </div>
         </div>
-    </div>
-    <div class="box_1">
-        <div class="group">
-            <a href={% url 'category_result' 1 %}>
-                <div class="category">
-                    국물 요리   
-                </div>
-            </a>
-            <a href={% url 'category_result' 2 %}>
-                <div class="category">
-                    면 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 3 %}>
-                <div class="category">
-                    찜 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 4 %}>
-                <div class="category">
-                    색다른 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 5 %}>
-                <div class="category">
-                    디저트 요리
-                </div>
-            </a>
+        <div class="box">
+            <div class="disease">
+                <a href={% url 'category_result' 6 %}>김밥/롤/주먹밥</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 7 %}>콩/두부 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 8 %}>햄/소시지 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 9 %}>나들이 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 10 %}>건강한 요리</a>
+            </div>
         </div>
-        <div class="group">
-            <a href={% url 'category_result' 6 %}>
-                <div class="category">
-                    김밥/롤/주먹밥   
-                </div>
-            </a>
-            <a href={% url 'category_result' 7 %}>
-                <div class="category">
-                    콩/두부 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 8 %}>
-                <div class="category">
-                    햄/소시지 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 9 %}>
-                <div class="category">
-                    나들이 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 10 %}>
-                <div class="category">
-                    건강한 요리
-                </div>
-            </a>
+        <div class="box2">
+            <div class="inside_title">
+                요리 이름 또는 재료로 검색할 수 있습니다
+            </div>
+            <div>
+                <form action="{%url 'search_result' %}" method='POST'>
+                {% csrf_token %}
+                    <div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate="Enter">
+						<input class="input100" type="text" name="input_food">
+						<div class="focus-input100"></div>
+					</div>
+                    <div class="box"><button type="submit">검색하기</button></div>
+                </form>
+            </div>
+        </div>
+        <div class="title">
+            <div>
+                <a href={% url 'home' %} class="btn btn-primary btn-xl page-scroll">home</a>
+            </div>
         </div>
     </div>
-    <br/>
-    <form action="{%url 'search_result' %}" method='POST'>
-        {% csrf_token %}
-        <!-- <input type="radio" name="check_search" checked="checked" value="요리이름" /> 요리 이름으로 검색하기
-        <input type="radio" name="check_search" value="재료" /> 재료로 검색하기
-        <br/>
-        <br/>
-        -->
-        <h3>요리 이름 또는 재료로 검색할 수 있습니다.</h3>
-        <div>
-            <input placeholder="입력하세요" name="input_food">
-            <button type="submit">검색하기</button>
-        </div>
-
-        {% comment %} <div>
-            <input placeholder="재료를 입력하세요" name="input_material">
-            <button type="submit">검색하기</button>
-        </div> {% endcomment %}
-    </form>
-   
 </body>
 </html>

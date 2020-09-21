@@ -6,123 +6,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>category_result</title>
-    <link rel="stylesheet" href="{% static 'recipe.css' %}">
+    <link rel="stylesheet" href="{% static 'category_result.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/animate.min.cs' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/creative.css' %}" type="text/css">
+    <link rel="stylesheet" type="text/css" href='{% static "css/util.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "css/main.css" %}'>
 </head>
 <body>
-    <div class="title">
-        <div class="title_1">
-            <h1>{{title}}</h1>
+    <div class="for_center">
+        <div class="title">
+            <div><h1>{{title}}</h1></div>
         </div>
-        <div class="title_2">
-            <a href={% url 'home' %}>홈으로</a>
-        </div>
-    </div>
-
-    <div class="box_1">
-        <div class="group">
-            <a href={% url 'category_result' 1 %}>
-                <div class="category">
-                    국물 요리   
-                </div>
-            </a>
-            <a href={% url 'category_result' 2 %}>
-                <div class="category">
-                    면 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 3 %}>
-                <div class="category">
-                    찜 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 4 %}>
-                <div class="category">
-                    색다른 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 5 %}>
-                <div class="category">
-                    디저트 요리
-                </div>
-            </a>
-        </div>
-        <div class="group">
-            <a href={% url 'category_result' 6 %}>
-                <div class="category">
-                    김밥/롤/주먹밥   
-                </div>
-            </a>
-            <a href={% url 'category_result' 7 %}>
-                <div class="category">
-                    콩/두부 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 8 %}>
-                <div class="category">
-                    햄/소시지 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 9 %}>
-                <div class="category">
-                    나들이 요리
-                </div>
-            </a>
-            <a href={% url 'category_result' 10 %}>
-                <div class="category">
-                    건강한 요리
-                </div>
-            </a>
-        </div>
-    </div>
-
-        <div class="contents">
+        <div class="inside_title">
             {{contents}}
         </div>
-        <br/>
-
-
-
-        <div class="menu_2">
-            {% for line in in_category_1 %}
-            <li>
-                <div class='menu_list'>
-                    <div class='menu_name'>
-                         <a href={% url 'detail' line.idx %}> 
-                            {{line.name}}
-                         </a> 
+        <span class="color">요리 이름을 누르면 레시피를 볼 수 있어요</span>
+        <div class="box">
+            <div class="box2">
+                {% for line in in_category_1 %}
+                    <div>
+                        <div class="inside_word">
+                            <a href={% url 'detail' line.idx %}> 
+                                {{line.name}}
+                            </a> 
+                        </div> 
                     </div>
-                    
-                </div>
-            </li>
-            {% endfor %}
-        </div> 
-        <div class="menu_2">
-            {% for line in in_category_2 %}
-            <li>
-                <div class='menu_list'>
-                    <div class='menu_name'>
-                         <a href={% url 'detail' line.idx %}> 
-                            {{line.name}}
-                         </a> 
+                {% endfor %}
+            </div> 
+            <div class="box2">
+                {% for line in in_category_2 %}
+                    <div>
+                        <div class="inside_word">
+                            <a href={% url 'detail' line.idx %}> 
+                                {{line.name}}
+                            </a> 
+                        </div> 
                     </div>
-                    
-                </div>
-            </li>
-            {% endfor %}
-        </div> 
-        <div class="menu_2">
-            {% for line in in_category_3 %}
-            <li>
-                <div class='menu_list'>
-                    <div class='menu_name'>
-                         <a href={% url 'detail' line.idx %}> 
-                            {{line.name}}
-                         </a> 
+                {% endfor %}
+            </div> 
+            <div class="box2">
+                {% for line in in_category_3 %}
+                    <div>
+                        <div class="inside_word">
+                            <a href={% url 'detail' line.idx %}> 
+                                {{line.name}}
+                            </a> 
+                        </div>
                     </div>
-                    
-                </div>
-            </li>
-            {% endfor %}
-        </div> 
+                {% endfor %}
+            </div> 
+        </div>
+
+        <div class="box">
+            <div class="disease">
+                <a href={% url 'category_result' 1 %}>국물 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 2 %}>면 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 3 %}>찜 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 4 %}>색다른 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 5 %}>디저트 요리</a>
+            </div>
+        </div>
+        <div class="box">
+            <div class="disease">
+                <a href={% url 'category_result' 6 %}>김밥/롤/주먹밥</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 7 %}>콩/두부 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 8 %}>햄/소시지 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 9 %}>나들이 요리</a>
+            </div>
+            <div class="disease">
+                <a href={% url 'category_result' 10 %}>건강한 요리</a>
+            </div>
+        </div>
+        <div class="title">
+            <div>
+                <a href={% url 'home' %} class="btn btn-primary btn-xl page-scroll">home</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

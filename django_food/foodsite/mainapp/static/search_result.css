@@ -1,0 +1,64 @@
+.for_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.title{
+    width: 80%;
+    margin: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 20px;
+    font-weight: 1500;
+}
+
+.box{
+    width: 80%;
+    margin: 20px;
+    padding: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box2{
+    width: 80%;
+    margin: 20px;
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}
+
+.inside_title{
+    width: 80%;
+    margin: 20px;
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.inside_word{
+    margin: 5px;
+    padding: 5px;
+}
+
+.color{
+    color: #f05f40;
+}
