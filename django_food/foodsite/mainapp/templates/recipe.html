@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link rel="stylesheet" href="{% static 'recipe.css' %}">
 </head>
 <body>
     <div class="title">
@@ -17,16 +17,74 @@
             <a href={% url 'home' %}>홈으로</a>
         </div>
     </div>
-    <input type="radio" name="check_search" checked="checked" value="요리이름" /> 요리이름
-    <input type="radio" name="check_search" value="재료" /> 재료
+    <div class="box_1">
+        <div class="group">
+            <a href={% url 'category_result' 1 %}>
+                <div class="category">
+                    국물 요리   
+                </div>
+            </a>
+            <a href={% url 'category_result' 2 %}>
+                <div class="category">
+                    면 요리
+                </div>
+            </a>
+            <a href={% url 'category_result' 3 %}>
+                <div class="category">
+                    찜 요리
+                </div>
+            </a>
+            <a href={% url 'category_result' 4 %}>
+                <div class="category">
+                    색다른 요리
+                </div>
+            </a>
+            <a href={% url 'category_result' 5 %}>
+                <div class="category">
+                    디저트 요리
+                </div>
+            </a>
+        </div>
+        <div class="group">
+            <a href={% url 'category_result' 6 %}>
+                <div class="category">
+                    김밥/롤/주먹밥   
+                </div>
+            </a>
+            <a href={% url 'category_result' 7 %}>
+                <div class="category">
+                    콩/두부 요리
+                </div>
+            </a>
+            <a href={% url 'category_result' 8 %}>
+                <div class="category">
+                    햄/소시지 요리
+                </div>
+            </a>
+            <a href={% url 'category_result' 9 %}>
+                <div class="category">
+                    나들이 요리
+                </div>
+            </a>
+            <a href={% url 'category_result' 10 %}>
+                <div class="category">
+                    건강한 요리
+                </div>
+            </a>
+        </div>
+    </div>
     <br/>
-    <br/>
-    <input placeholder="이름을 입력하세요" name="name">
+    <form action="{%url 'recipe' %}" method='POST'>
+        {% csrf_token %}
+        <!-- <input type="radio" name="check_search" checked="checked" value="요리이름" /> 요리 이름으로 검색하기
+        <input type="radio" name="check_search" value="재료" /> 재료로 검색하기
         <br/>
         <br/>
-    <input placeholder="전화번호를 입력하세요" name="phone_num">
-        <br/>
-        <br/>
-    <button type="submit">검색하기</button>
+        -->
+        <h3>요리 이름 또는 재료로 검색할 수 있습니다.</h3>
+        <input placeholder="입력하세요" name="search_input">
+        <button type="submit">검색하기</button>
+    </form>
+   
 </body>
 </html>

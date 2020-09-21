@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'personal.css' %}">
+</head>
+<body>
+    <div class="title">
+        <div class="title_1">
+            <h1>{{user}}님의 냉장고 맞춤요리 추천</h1>
+        </div>
+        <div class="title_2">
+            <a href={% url 'home' %}>홈으로</a>
+        </div>
+    </div>
+
+    <h3>사용재료</h3>
+    {% for use_material in use_materials.itertuples %}
+        <ul>
+            <div>
+                재료:  {{use_material.material}}
+            </div>
+            <div>
+                남은기한: {{use_material.shelf_life}}
+            </div>
+            <br>
+        </ul>
+    {% endfor %}
+
+
+
+    <div>
+        <h3>요리추천 List</h3>
+        {% for food in data.itertuples %}
+            <div>
+                <li>
+                    <a href={% url 'detail' food.idx %}>
+                    {{food.name}}
+                     </a>
+                </li>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+
+</body>
+</html>

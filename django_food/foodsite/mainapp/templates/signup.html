@@ -1,39 +1,122 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<title>Signup</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href='{% static "img/icons/favicon.ico" %}'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/bootstrap/css/bootstrap.min.css" %}'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='{% static "fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='{% static "fonts/iconic/css/material-design-iconic-font.min.css" %}'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/animate/animate.css" %}'>
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/css-hamburgers/hamburgers.min.css" %}'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/animsition/css/animsition.min.css" %}'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/select2/select2.min.css" %}'>
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/daterangepicker/daterangepicker.css" %}'>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href='{% static "css/util.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "css/main.css" %}'>
+<!--===============================================================================================-->
 </head>
 <body>
-    <h1>SignUp</h1>
-    <form action="{%url 'signup' %}" method='POST'>
-        {% csrf_token %}
-        <input type="text" placeholder="아이디를 입력하세요" name='user_id' />
-        <br/>
-        <br/>
-        <input type="password" placeholder="비밀번호를 입력하세요" name='user_pw' />
-        <br/>
-        <br/>
-        <input type="password" placeholder='비밀번호를 다시 입력하세요' name='user_pw_check' />
-        <br/>
-        <br/>
-        <input type="text" placeholder="이름을 입력하세요" name='name' />
-        <br/>
-        <br/>
-        <input type="text" placeholder="성별을 입력하세요" name='gender' />
-        <br/>
-        <br/>
-        <input type="text" placeholder="나이대를 입력하세요" name='age' />
-        <br/>
-        <br/>
-        <input type="text" placeholder="기피하는 재료를 입력하세요" name='repmaterial' />
-        <br/>
-        <br/>
-        <input type="text" placeholder="선호하는 tag를 입력하세요" name='pretag' />
-        <br/>
-        <br/>
-        <button type='submit'>회원가입하기</button>
-    </form>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<form action="{%url 'signup' %}" method='POST'>
+				{% csrf_token %}
+					<span class="login100-form-title p-b-70">
+						Welcome
+					</span>
+					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
+						<input class="input100" type="text" name="user_id">
+						<span class="focus-input100" data-placeholder="아이디를 입력하세요"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
+						<input class="input100" type="password" name="user_pw">
+						<span class="focus-input100" data-placeholder="비밀번호를 입력하세요"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50">
+						<input class="input100" type="password" name="user_pw_check">
+						<span class="focus-input100" data-placeholder="비밀번호를 다시 입력하세요"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50">
+						<input class="input100" type="text" name="name">
+						<span class="focus-input100" data-placeholder="이름을 입력하세요"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50">
+						<input class="input100" type="text" name="gender">
+						<span class="focus-input100" data-placeholder="성별을 입력하세요"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50">
+						<input class="input100" type="text" name="age">
+						<span class="focus-input100" data-placeholder="나이대를 입력하세요"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50">
+						<input class="input100" type="text" name="repmaterial">
+						<span class="focus-input100" data-placeholder="기피하는 재료를 입력하세요"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-50">
+						<input class="input100" type="text" name="pretag">
+						<span class="focus-input100" data-placeholder="선호하는 tag를 입력하세요"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Signup
+						</button>
+					</div>
+
+					<ul class="login-more p-t-190">
+						<li>
+							<span class="txt1">
+								Already have an account?
+							</span>
+
+							<a href={% url 'login' %} class="txt2">
+								  Login
+							</a>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src='{% static "vendor/jquery/jquery-3.2.1.min.js" %}'></script>
+<!--===============================================================================================-->
+	<script src='{% static "vendor/animsition/js/animsition.min.js" %}'></script>
+<!--===============================================================================================-->
+	<script src='{% static "vendor/bootstrap/js/popper.js" %}'></script>
+	<script src='{% static "vendor/bootstrap/js/bootstrap.min.js" %}'></script>
+<!--===============================================================================================-->
+	<script src='{% static "vendor/select2/select2.min.js" %}'></script>
+<!--===============================================================================================-->
+	<script src='{% static "vendor/daterangepicker/moment.min.js" %}'></script>
+	<script src='{% static "vendor/daterangepicker/daterangepicker.js" %}'></script>
+<!--===============================================================================================-->
+	<script src='{% static "vendor/countdowntime/countdowntime.js" %}'></script>
+<!--===============================================================================================-->
+	<script src='{% static "js/main.js" %}'></script>
 </body>
 </html>
