@@ -11,28 +11,13 @@
 <body>
     <div class="title">
         <div class="title_1">
-            <h1>{{search_input}}</h1>
+            {% comment %} <h1>{{search_input}}</h1> {% endcomment %}
         </div>
         <div class="title_2">
             <a href={% url 'home' %}>홈으로</a>
         </div>
     </div>
-  
-
-        <div class="menu_2">
-            {% for line in search_result %}
-            <li>
-                <div class='menu_list'>
-                    <div class='menu_name'>
-                         <a href={% url 'detail' line.idx %}> 
-                            {{line.name}}
-                         </a> 
-                    </div>
-                    
-                </div>
-            </li>
-            {% endfor %}
-        </div> 
+        {{search_result}}
          
 </body>
 </html>

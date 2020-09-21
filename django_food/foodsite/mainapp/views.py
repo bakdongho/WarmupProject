@@ -297,26 +297,27 @@ def nut_result(request,category):
 
 
 def recipe(request):
-
-    if request.method == 'POST':
-        search_input = request.POST['search_input']
-        return redirect('search_result')
     
     return render(request, 'recipe.html')
 
-def search_result(request, search_input):
+def search_result(request):
     GeneralFood_obj=GeneralFood.objects.all().values()
     df=pd.DataFrame(GeneralFood_obj)
-    df = df[df['name'|'material'].str.contains(search_input)]
-    search_food_obj = []
-    for i in df.idx:
-        search_food_obj.append(GeneralFood.object.get(idx=i))
+# df = df[df['material'].str.contains('빵|밀가루|버터|마가린|치즈|햄|조개|마요네즈|새우|김치')==False]
+    if request.method == 'POST':
 
-    context={
-        'search_input' : search_input,
-        'search_result' : search_food_obj[:]
+        input_food = request.POST['input_food']
+        
+        df = df[df['name'].str.contains(input_food)]
 
-    }
+        search_food_obj = []
+        for i in df.idx:
+            search_food_obj.append(GeneralFood.objects.get(idx=i))
+
+        context={
+            'search_foodname' : input_food,
+            'search_result' : search_food_obj[:]
+            }
 
     return render(request, 'search_result.html', context)
 
