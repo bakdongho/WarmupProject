@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit_refrigerator</title>
+    <link rel="stylesheet" type="text/css" href='{% static "vendor/bootstrap/css/bootstrap.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "fonts/iconic/css/material-design-iconic-font.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/animate/animate.css" %}'>	
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/css-hamburgers/hamburgers.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/animsition/css/animsition.min.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/select2/select2.min.css" %}'>	
+	<link rel="stylesheet" type="text/css" href='{% static "vendor/daterangepicker/daterangepicker.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "css/util.css" %}'>
+	<link rel="stylesheet" type="text/css" href='{% static "css/main.css" %}'>
+</head>
+<body>
+    <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<span class="login100-form-title p-b-70">
+					{{user}}의 냉장고입니다!
+				</span>
+
+                <form action="{%url 'edit_refrigerator' user.pk refrigerator_user.pk %}" method="POST">
+                    {% csrf_token %}
+					<div class="wrap-input100 validate-input m-b-50">
+						<span>재료를 수정하세요</span>
+                        <input class="input100" name="material" value="{{refrigerator_user.material}}">
+					</div>
+					<div class="wrap-input100 validate-input m-b-50">
+                    	<span>유통기한을 수정하세요</span>
+						<input class="input100" name="shelf_life" value="{{refrigerator_user.shelf_life}}">
+					</div>
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Edit
+						</button>
+					</div>
+                </form>
+
+                <br>
+                <br>
+
+                <form action="{%url 'delete_refrigerator' user.pk refrigerator_user.pk %}" method='POST'>
+                    {% csrf_token %}
+                    <div class="container-login100-form-btn">
+						<button class="login100-form-btn" onclick="return confirm('정말 삭제하시겠습니까?');">
+							Delete
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
